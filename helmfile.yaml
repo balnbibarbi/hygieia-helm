@@ -1,10 +1,8 @@
 repositories:
-- name: stable
-  url: https://charts.helm.sh/stable
-#- name: hygieia
-#  url: https://github.com/hygieia/Hygieia
-#- name: hygieia-api
-#  url: https://github.com/hygieia/api
+#- name: stable
+#  url: https://charts.helm.sh/stable
+- name: bitnami
+  url: https://charts.bitnami.com/bitnami
 
 helmDefaults:
   wait: true
@@ -12,7 +10,7 @@ helmDefaults:
 
 releases:
 - name: mongodb
-  chart: stable/mongodb
+  chart: bitnami/mongodb
   values:
   - values.yaml
 - name: hygieia
