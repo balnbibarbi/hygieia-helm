@@ -18,29 +18,16 @@ spec:
       hostAliases:
       - ip: "127.0.0.1"
         hostnames:
-        - "db"
         - "api"
       containers:
-      - name: 'db'
-        image: mongo:latest
-        imagePullPolicy: IfNotPresent
-        volumeMounts:
-        - name: "db-data"
-          mountPath: "/data/db"
       - name: 'api'
         image: hygieia-api
         imagePullPolicy: IfNotPresent
+        env:
+        - name: SPRING_DATA_MONGODB_HOST
+          value: "mongodb"
       - name: 'ui'
         image: hygieia-ui
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 80
-  volumeClaimTemplates:
-  - metadata:
-      name: "db-data"
-    spec:
-      accessModes: [ "ReadWriteOnce" ]
-      storageClassName: "standard"
-      resources:
-        requests:
-          storage: 1Gi

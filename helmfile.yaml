@@ -11,6 +11,10 @@ helmDefaults:
   createNamespace: false
 
 releases:
+- name: mongodb
+  chart: stable/mongodb
+  values:
+  - values.yaml
 - name: hygieia
   chart: ./charts/hygieia
   values:
