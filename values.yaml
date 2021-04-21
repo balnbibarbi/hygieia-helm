@@ -1,0 +1,4 @@
+auth:
+  username: "dashboarduser"
+  password: "dbpassword"
+  database: "dashboarddb"
