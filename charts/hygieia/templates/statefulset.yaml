@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: hygieia
+  labels:
+    app: hygieia
+spec:
+  replicas: 1
+  serviceName: hygieia
+  selector:
+    matchLabels:
+      app: hygieia
+  template:
+    metadata:
+      labels:
+        app: hygieia
+    spec:
+      hostAliases:
+      - ip: "127.0.0.1"
+        hostnames:
+        - "db"
+        - "api"
+      containers:
+      - name: 'db'
+        image: mongo:latest
+        imagePullPolicy: IfNotPresent
+        volumeMounts:
+        - name: "db-data"
+          mountPath: "/data/db"
+      - name: 'api'
+        image: hygieia-api
+        imagePullPolicy: IfNotPresent
+      - name: 'ui'
+        image: hygieia-ui
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 80
+  volumeClaimTemplates:
+  - metadata:
+      name: "db-data"
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: "standard"
+      resources:
+        requests:
+          storage: 1Gi

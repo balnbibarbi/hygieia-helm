@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: hygieia
+  labels:
+    app: hygieia
+spec:
+  selector:
+    app: hygieia
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80

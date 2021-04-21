@@ -1,0 +1,17 @@
+repositories:
+- name: stable
+  url: https://charts.helm.sh/stable
+#- name: hygieia
+#  url: https://github.com/hygieia/Hygieia
+#- name: hygieia-api
+#  url: https://github.com/hygieia/api
+
+helmDefaults:
+  wait: true
+  createNamespace: false
+
+releases:
+- name: hygieia
+  chart: ./charts/hygieia
+  values:
+  - values.yaml

@@ -1,0 +1,6 @@
+apiVersion: v2
+name: hygieia
+description: In essence, Hygieia itself is an aggregator that pulls data from various DevOps tools that teams use in their CICD pipeline, making it easily digestible in dashboard view(s).
+type: application
+version: 0.0.1
+appVersion: 3.0
