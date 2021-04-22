@@ -1,12 +1,11 @@
 apiVersion: apps/v1
-kind: StatefulSet
+kind: Deployment
 metadata:
   name: hygieia
   labels:
     app: hygieia
 spec:
   replicas: 1
-  serviceName: hygieia
   selector:
     matchLabels:
       app: hygieia
@@ -19,6 +18,8 @@ spec:
       - name: 'api'
         image: hygieia-api
         imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: {{ .Values.api.port }}
         env:
         - name: SPRING_DATA_MONGODB_HOST
           value: "mongodb"
