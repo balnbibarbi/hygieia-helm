@@ -15,10 +15,6 @@ spec:
       labels:
         app: hygieia
     spec:
-      hostAliases:
-      - ip: "127.0.0.1"
-        hostnames:
-        - "api"
       containers:
       - name: 'api'
         image: hygieia-api
@@ -26,8 +22,31 @@ spec:
         env:
         - name: SPRING_DATA_MONGODB_HOST
           value: "mongodb"
+        - name: MONGODB_PORT
+          value: "27017"
+        - name: MONGODB_PASSWORD
+          value: "{{ .Values.auth.password }}"
+        - name: MONGODB_USERNAME
+          value: "{{ .Values.auth.username }}"
+        - name: MONGODB_DBNAME
+          value: "{{ .Values.auth.database }}"
+        - name: MONGODB_REPLICASET
+          value: "false"
+        - name: SERVER_PORT
+          value: "{{ .Values.api.port }}"
+        - name: SERVER_CONTEXT_PATH
+          value: "/api"
       - name: 'ui'
         image: hygieia-ui
         imagePullPolicy: IfNotPresent
         ports:
-        - containerPort: 80
+        - containerPort: {{ .Values.ui.port }}
+        env:
+        - name: API_HOST
+          value: "{{ .Values.api.host }}"
+        - name: API_PORT
+          value: "{{ .Values.api.port }}"
+        - name: UI_HOSTNAME
+          value: "{{ .Values.ui.host }}"
+        - name: UI_PORT
+          value: "{{ .Values.ui.port }}"

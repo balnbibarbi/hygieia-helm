@@ -5,13 +5,8 @@ metadata:
   labels:
     app: hygieia
 spec:
-  rules:
-  - http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: hygieia
-            port:
-              number: 80
+  defaultBackend:
+    service:
+      name: hygieia-headless
+      port:
+        number: {{ .Values.ui.port }}

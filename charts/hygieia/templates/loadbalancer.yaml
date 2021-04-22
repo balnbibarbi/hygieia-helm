@@ -1,3 +1,4 @@
+{{ if .Values.loadBalancer.enabled }}
 apiVersion: v1
 kind: Service
 metadata:
@@ -8,5 +9,6 @@ spec:
     statefulset.kubernetes.io/pod-name: hygieia-0
   ports:
   - protocol: TCP
-    port: 80
-    targetPort: 80
+    port: {{ .Values.ui.port }}
+    targetPort: {{ .Values.ui.port }}
+{{ end }}

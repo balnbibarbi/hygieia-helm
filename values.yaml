@@ -2,3 +2,14 @@ auth:
   username: "dashboarduser"
   password: "dbpassword"
   database: "dashboarddb"
+
+ui:
+  host: localhost
+  port: 80
+
+api:
+  host: localhost
+  port: 8080
+
+loadBalancer:
+  enabled: true
