@@ -6,7 +6,7 @@ metadata:
 spec:
   type: LoadBalancer
   selector:
-    statefulset.kubernetes.io/pod-name: hygieia-0
+    app: hygieia
   ports:
   - protocol: TCP
     port: {{ .Values.ui.port }}
